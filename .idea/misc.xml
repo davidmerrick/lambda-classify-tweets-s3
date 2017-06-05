@@ -10,14 +10,4 @@
     <other-services-enabled>true</other-services-enabled>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" />
-  <component name="SbtLocalSettings">
-    <option name="modificationStamps">
-      <map>
-        <entry key="$USER_HOME$/jive/moneytv" value="1462309065000" />
-      </map>
-    </option>
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
 </project>
