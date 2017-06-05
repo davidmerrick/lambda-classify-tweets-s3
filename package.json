@@ -1,0 +1,25 @@
+{
+  "name": "lambda-classify-tweets-s3",
+  "version": "1.0.0",
+  "description": "Fetches Tweets by a user, then uses IBM's Watson to find the first one matching certain parameters.",
+  "author": "David Merrick",
+  "dependencies": {
+    "aws-sdk": "^2.62.0",
+    "regenerator-runtime": "^0.10.5",
+    "twitter": "^1.7.0",
+    "watson-developer-cloud": "^2.32.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-install": "^1.1.0",
+    "gulp-zip": "^4.0.0",
+    "mocha": "^3.1.2",
+    "node-aws-lambda": "^0.1.8",
+    "rewire": "^2.5.2",
+    "run-sequence": "^1.2.2"
+  }
+}
