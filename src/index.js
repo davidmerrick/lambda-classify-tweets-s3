@@ -8,6 +8,7 @@ const S3_REGION = process.env.S3_REGION || "us-west-2";
 const S3_BUCKET = process.env.S3_BUCKET;
 const FILENAME = process.env.FILENAME;
 
+// Todo: Add validation of environment variables
 var index = async (event, context, callback) => {
     const s3 = new AWS.S3();
     let params = {
