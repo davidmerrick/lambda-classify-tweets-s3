@@ -9,7 +9,7 @@ var index = async (event, context, callback) => {
     const FILENAME = process.env.FILENAME;
 
     if(!S3_BUCKET || !FILENAME){
-        return callback(new Error("Please specify FILENAME and S3_BUCKET variables.");
+        return callback(new Error("Please specify FILENAME and S3_BUCKET variables."));
     }
 
     let message = event.Records[0].Sns.Message;
