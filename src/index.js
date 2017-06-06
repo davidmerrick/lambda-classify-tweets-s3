@@ -25,12 +25,11 @@ var index = async (event, context, callback) => {
 
     let data = await s3.getObject(params).promise();
     let classifiedTweets = data.Body;
-    //if (alreadyClassified(classifiedTweets, allTweets)) {
-    //    return callback(null);
-    //}
+    if (alreadyClassified(classifiedTweets, allTweets)) {
+       return callback(null);
+    }
 
-    //let tweetsToClassify = filterAlreadyClassifiedTweets(classifiedTweets, allTweets);
-    let tweetsToClassify = allTweets;
+    let tweetsToClassify = filterAlreadyClassifiedTweets(classifiedTweets, allTweets);
     let newlyClassifiedTweets = await classifyTweets(tweetsToClassify);
     let newData = newlyClassifiedTweets.concat(classifiedTweets);
     params = {
