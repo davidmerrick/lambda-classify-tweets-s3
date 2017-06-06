@@ -15,12 +15,13 @@ class MoodUtils {
             };
 
             tone_analyzer.tone(params, (error, response) => {
-                if(error){
+                if (error) {
                     return reject(error);
                 }
                 return resolve(response);
             });
-    });
+        });
+    }
 }
 
 export default MoodUtils
