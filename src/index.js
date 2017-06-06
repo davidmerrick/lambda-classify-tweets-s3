@@ -64,7 +64,7 @@ function filterAlreadyClassifiedTweets(classifiedTweets, allTweets){
     return tweetsToClassify;
 }
 
-function classifyTweets(tweets){
+async function classifyTweets(tweets){
     let classifiedTweets = [];
     for(var i = 0; i < tweets.length; i++) {
         let tweet = tweetsToClassify[i];
