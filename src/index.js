@@ -1,5 +1,4 @@
-import ClassifierUtils from './utils/ClassifierUtils'
-import MoodUtils from './utils/MoodUtils'
+import TweetsUtils from './utils/TweetsUtils'
 import AWS from "aws-sdk";
 import regeneratorRuntime from 'regenerator-runtime' // Important! This needs to be imported here for Babel to transpile correctly.
 
@@ -25,12 +24,12 @@ var index = async (event, context, callback) => {
 
     let data = await s3.getObject(params).promise();
     let classifiedTweets = data.Body;
-    if (alreadyClassified(classifiedTweets, allTweets)) {
+    if (TweetsUtils.alreadyClassified(classifiedTweets, allTweets)) {
        return callback(null);
     }
 
-    let tweetsToClassify = filterAlreadyClassifiedTweets(classifiedTweets, allTweets);
-    let newlyClassifiedTweets = await classifyTweets(tweetsToClassify);
+    let tweetsToClassify = TweetsUtils.filterAlreadyClassifiedTweets(classifiedTweets, allTweets);
+    let newlyClassifiedTweets = await TweetsUtils.classifyTweets(tweetsToClassify);
     let newData = newlyClassifiedTweets.concat(classifiedTweets);
     params = {
         Body: JSON.stringify(newData),
@@ -46,39 +45,5 @@ var index = async (event, context, callback) => {
         console.error(err);
     }
 };
-
-function alreadyClassified(classifiedTweets, allTweets){
-    if(!classifiedTweets || classifiedTweets.length === 0){
-        return false;
-    }
-    return classifiedTweets[0].tweet.id === allTweets[0].id;
-}
-
-function filterAlreadyClassifiedTweets(classifiedTweets, allTweets){
-    if(!classifiedTweets || classifiedTweets.length === 0){
-        return allTweets;
-    }
-
-    let alreadyClassifiedIds = classifiedTweets.map(item => item.tweet.id);
-    let tweetsToClassify = allTweets.filter(item => !alreadyClassifiedIds.includes(item.id));
-    return tweetsToClassify;
-}
-
-async function classifyTweets(tweets){
-    let classifiedTweets = [];
-    for(var i = 0; i < tweets.length; i++) {
-        let tweet = tweets[i];
-        let classification = await ClassifierUtils.classifyText(tweet.text);
-        let mood = await MoodUtils.analyzeText(tweet.text);
-        let newItem = {
-            tweet: tweet,
-            classification: classification,
-            mood: mood
-        }
-
-        classifiedTweets.push(newItem);
-    };
-    return classifiedTweets;
-}
 
 exports.handler = index;
