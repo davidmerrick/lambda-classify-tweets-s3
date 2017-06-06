@@ -15,7 +15,6 @@ var index = async (event, context, callback) => {
     let message = event.Records[0].Sns.Message;
     console.log('Message received from SNS:', message);
     let allTweets = JSON.parse(message);
-    console.log('First item in tweets:', allTweets[0]);
 
     const s3 = new AWS.S3();
     let params = {
@@ -24,7 +23,7 @@ var index = async (event, context, callback) => {
     };
 
     let data = await s3.getObject(params).promise();
-    let classifiedTweets = data.Body;
+    let classifiedTweets = JSON.parse(data.Body);
     if (TweetsUtils.alreadyClassified(classifiedTweets, allTweets)) {
        return callback(null);
     }
