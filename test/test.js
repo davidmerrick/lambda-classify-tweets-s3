@@ -1,6 +1,5 @@
 import ClassifierUtils from '../utils/ClassifierUtils'
 import MoodUtils from '../utils/MoodUtils'
-import TwitterUtils from '../utils/TwitterUtils'
 import AWS from "aws-sdk";
 import regeneratorRuntime from 'regenerator-runtime' // Important! This needs to be imported here for Babel to transpile correctly.
 
