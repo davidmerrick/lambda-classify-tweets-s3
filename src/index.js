@@ -3,6 +3,7 @@ import MoodUtils from './utils/MoodUtils'
 import AWS from "aws-sdk";
 import regeneratorRuntime from 'regenerator-runtime' // Important! This needs to be imported here for Babel to transpile correctly.
 
+// Todo: add validation for CLASSIFIER_USERNAME/PASS and MOOD_USERNAME/PASS values.
 var index = async (event, context, callback) => {
     const S3_REGION = process.env.S3_REGION || "us-west-2";
     const S3_BUCKET = process.env.S3_BUCKET;
@@ -22,30 +23,30 @@ var index = async (event, context, callback) => {
         Key: FILENAME
     };
 
-    let data = await s3.getObject(params);
+    let data = await s3.getObject(params).promise();
     let classifiedTweets = data.Body;
-    if (alreadyClassified(classifiedTweets, allTweets)) {
-        return callback(null);
-    }
+    //if (alreadyClassified(classifiedTweets, allTweets)) {
+    //    return callback(null);
+    //}
 
-    let tweetsToClassify = filterAlreadyClassifiedTweets(classifiedTweets, allTweets);
-    let newlyClassifiedTweets = classifyTweets(tweetsToClassify);
+    //let tweetsToClassify = filterAlreadyClassifiedTweets(classifiedTweets, allTweets);
+    let tweetsToClassify = allTweets;
+    let newlyClassifiedTweets = await classifyTweets(tweetsToClassify);
     let newData = newlyClassifiedTweets.concat(classifiedTweets);
-    postData(newData, () => {
-        callback(null);
-    });
-};
-
-async function postData(newData, callback){
-    let params = {
-        Body: newData,
+    params = {
+        Body: JSON.stringify(newData),
         ACL: "public-read",
         Bucket: S3_BUCKET,
         Key: FILENAME
     };
-    await s3.putObject(params);
-    callback(null);
-}
+
+    try {
+        await s3.putObject(params).promise();
+        console.log("SUCCESS: put data in S3 bucket");
+    } catch(err){
+        console.error(err);
+    }
+};
 
 function alreadyClassified(classifiedTweets, allTweets){
     if(!classifiedTweets || classifiedTweets.length === 0){
@@ -67,7 +68,7 @@ function filterAlreadyClassifiedTweets(classifiedTweets, allTweets){
 async function classifyTweets(tweets){
     let classifiedTweets = [];
     for(var i = 0; i < tweets.length; i++) {
-        let tweet = tweetsToClassify[i];
+        let tweet = tweets[i];
         let classification = await ClassifierUtils.classifyText(tweet.text);
         let mood = await MoodUtils.analyzeText(tweet.text);
         let newItem = {
