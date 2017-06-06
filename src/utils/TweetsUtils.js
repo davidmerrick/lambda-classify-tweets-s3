@@ -8,7 +8,7 @@ class TweetsUtils {
         if(!classifiedTweets || classifiedTweets.length === 0){
             return false;
         }
-        return classifiedTweets[0].tweet.id_str === allTweets[0].id_str;
+        return classifiedTweets[0].tweet.id === allTweets[0].id;
     }
 
     static filterAlreadyClassifiedTweets(classifiedTweets, allTweets){
@@ -16,8 +16,8 @@ class TweetsUtils {
             return allTweets;
         }
 
-        let alreadyClassifiedIds = classifiedTweets.map(item => item.tweet.id_str);
-        let tweetsToClassify = allTweets.filter(item => !alreadyClassifiedIds.includes(item.id_str));
+        let alreadyClassifiedIds = classifiedTweets.map(item => item.tweet.id);
+        let tweetsToClassify = allTweets.filter(item => !alreadyClassifiedIds.includes(item.id));
         return tweetsToClassify;
     }
 

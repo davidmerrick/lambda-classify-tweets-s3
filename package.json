@@ -5,6 +5,7 @@
   "author": "David Merrick",
   "dependencies": {
     "aws-sdk": "^2.63.0",
+    "axios": "^0.16.2",
     "regenerator-runtime": "^0.10.5",
     "watson-developer-cloud": "^2.32.1"
   },
