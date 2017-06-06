@@ -4,7 +4,7 @@
   "description": "Fetches Tweets by a user, then uses IBM's Watson to find the first one matching certain parameters.",
   "author": "David Merrick",
   "dependencies": {
-    "aws-sdk": "^2.62.0",
+    "aws-sdk": "^2.63.0",
     "regenerator-runtime": "^0.10.5",
     "twitter": "^1.7.0",
     "watson-developer-cloud": "^2.32.1"

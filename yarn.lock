@@ -107,9 +107,9 @@ aws-sdk@2.x.x:
     xml2js "0.4.17"
     xmlbuilder "4.2.1"
 
-aws-sdk@^2.62.0:
-  version "2.62.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.62.0.tgz#98508d3f93aaf3f74f18ca3b8cfe3a11bdad1a5f"
+aws-sdk@^2.63.0:
+  version "2.63.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.63.0.tgz#b3d2a8de0acc3192e4e4c79110b2d397f9fb407d"
   dependencies:
     buffer "5.0.6"
     crypto-browserify "1.0.9"
