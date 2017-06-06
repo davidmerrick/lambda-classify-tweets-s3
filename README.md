@@ -1,4 +1,4 @@
-Lambda function which uses IBM Watson to classifiy Tweets. 
+Lambda function. Gets Tweets pushed to it via SNS, then classifies them with IBM Watson, then stores them in JSON on S3. 
 
 ## Reference
 
