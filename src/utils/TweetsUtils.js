@@ -1,5 +1,6 @@
 import MoodUtils from './MoodUtils'
 import ClassifierUtils from './ClassifierUtils'
+import regeneratorRuntime from 'regenerator-runtime' // Important! This needs to be imported here for Babel to transpile correctly.
 
 class TweetsUtils {
 
