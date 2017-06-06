@@ -14,8 +14,8 @@ var index = async (event, context, callback) => {
 
     let message = event.Records[0].Sns.Message;
     console.log('Message received from SNS:', message);
-    console.log('First item in message:', message[0]);
-    let allTweets = message;
+    let allTweets = JSON.parse(message);
+    console.log('First item in tweets:', allTweets[0]);
 
     const s3 = new AWS.S3();
     let params = {
