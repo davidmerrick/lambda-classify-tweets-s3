@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/davidmerrick/lambda-classify-tweets-s3.svg?branch=master)](https://travis-ci.org/davidmerrick/lambda-classify-tweets-s3)
+
 Lambda function. Gets Tweets pushed to it via SNS, then classifies them with IBM Watson, then stores them in JSON on S3. 
 
 ## Reference
