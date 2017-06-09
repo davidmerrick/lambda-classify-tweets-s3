@@ -37,7 +37,10 @@ var index = async (event, context, callback) => {
         Body: JSON.stringify(newData),
         ACL: "public-read",
         Bucket: S3_BUCKET,
-        Key: FILENAME
+        Key: FILENAME,
+        Metadata: {
+            "Content-Type": "application/json"
+        }
     };
 
     try {
