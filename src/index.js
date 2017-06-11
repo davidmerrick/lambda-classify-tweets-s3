@@ -38,9 +38,7 @@ var index = async (event, context, callback) => {
         ACL: "public-read",
         Bucket: S3_BUCKET,
         Key: FILENAME,
-        Metadata: {
-            "Content-Type": "application/json"
-        }
+        ContentType: "application/json"
     };
 
     try {
